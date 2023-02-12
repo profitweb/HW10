@@ -3,16 +3,22 @@ import java.util.Scanner;
 public class Main {
     static String booksInfo = "";
 
-
     public static void main(String[] args) {
         while (true) {
             String name = inputBookName();
             int pageCount = inputPageCount();
+            double bookPrice = inputBookPrice() ;
             addBook(name);
             addBook(name, pageCount);
+            addBook(name, pageCount, bookPrice);
             //todo использовать новый метод тут
             printInfo();
         }
+    }
+
+    public static double inputBookPrice() {
+        System.out.println("Введите цену книги:");
+        return new Scanner(System.in).nextDouble();
     }
 
     public static String inputBookName() {
@@ -29,11 +35,17 @@ public class Main {
         addBook(bookName, 0);
     }
 
+
     public static void addBook(String bookName, int pageCount) {
-        booksInfo = booksInfo + bookName + " - " + (pageCount > 0 ? pageCount : "N/A") + " стр.\n";
+       addBook(bookName, pageCount, 0);
     }
 
-    public static void printInfo() {
+    public static void addBook(String bookName, int pageCount, double bookPrice) {
+        booksInfo = booksInfo + bookName + " - " + (pageCount > 0 ? pageCount : "N/A") + " стр " + "-" + (bookPrice > 0.0 ? bookPrice + " рублей " : " Не Установлено ") + "\n";
+    }
+
+
+    public static void printInfo()    {
         System.out.println(booksInfo);
     }
 
